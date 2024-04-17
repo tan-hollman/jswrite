@@ -52,9 +52,20 @@
           }  
         };
 
+        const popupTemplate = {
+          title: "{Name}",
+          content: "{Description}"
+        }
+        const attributes = {
+          Name: "Stevie Ray Vaughan Statue",
+          Description: "A bronze sculpture of Stevie Ray Vaughan by Ralph Helmick"
+        }
+
         const pointGraphic = new Graphic({  
           geometry: point,  
-          symbol: simpleMarkerSymbol  
+          symbol: simpleMarkerSymbol,
+          attributes: attributes,
+          popupTemplate: popupTemplate
          });
 
          graphicsLayer.add(pointGraphic);
