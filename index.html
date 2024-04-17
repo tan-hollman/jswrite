@@ -69,23 +69,22 @@
           popupTemplate: popupTemplate
          });
 
-        let simpleLineSymbol = new SimpleLineSymbol({
-          color: [226, 119, 40],
+        const simpleLineSymbol = {
+          type: "simple-line",
+          color: [226, 119, 40],  // RGB color
           width: 4
-        });
+        };
         
-        let polylineCoords = [
-          [-111.30, 52.68],
-          [-98, 49.5],
-          [-93.94, 29.89]
-        ];
+        const polyline = {
+          type: "polyline",
+          paths: [
+            [-111.30, 52.68],
+            [-98, 49.5],
+            [-93.94, 29.89]
+          ]
+        };
 
-        let polyline = new Polyline({
-          paths: polylineCoords,
-          spatialReference: { wkid: 4326 }
-        });
-
-        let polylineGraphic = new Graphic({
+        const polylineGraphic = new Graphic({
           geometry: polyline,
           symbol: simpleLineSymbol
         });
