@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hello, AGOL! test2</title>
+  <title>Hello, AGOL! a</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
@@ -89,8 +89,34 @@
           symbol: simpleLineSymbol
         });
 
+        const simpleFillSymbol = {
+          type: "simple-fill",
+          color: [226, 119, 40, 0.8],
+          outline: {
+            color: [255, 255, 255],
+            width: 1
+          }
+        };
+
+        const polygon = {
+          type: "polygon",
+          rings: [
+            [-98.75, 31.25],
+            [-96.75, 31.25],
+            [-96.75, 33.25],
+            [-98.75, 33.25],
+            [-98.75, 31.25]
+          ]
+        };
+
+        const polygonGraphic = new Graphic({
+          geometry: polygon,
+          symbol: simpleFillSymbol
+        });
+
          graphicsLayer.add(pointGraphic);
          graphicsLayer.add(polylineGraphic);
+         graphicsLayer.add(polygonGraphic);
     });
   </script>
 
