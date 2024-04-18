@@ -146,13 +146,33 @@
           "title": "Airports",
           "content": "<b>Facility Name:</b> {Fac_Name}<br><b>City:</b> {City}<br><b>State:</b> {State_Name}<br>"
         }
+        
+        const airportLabels = {
+          symbol: {
+            type: "text",
+            color: "#FFFFFF",
+            haloColor: "#5E8D74",
+            haloSize: "2px",
+            font: {
+              size: "12px",
+              family: "Noto Sans",
+              style: "italic",
+              weight: "normal"
+            }
+          },
+          labelPlacement: "above-center",
+          labelExpressionInfo: {
+            expression: "$feature.Fac_Name"
+          }
+        };
 
         const airportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Airports_Hollman/FeatureServer",
           renderer: airportRenderer,
           definitionExpression: "Fac_Type = 'AIRPORT'",
           outFields: ["Fac_Name", "City", "State_Name"],
-          popupTemplate: popupAirports
+          popupTemplate: popupAirports,
+          labelingInfo: [airportLabels]
         });
         
         map.add(airportsLayer);
