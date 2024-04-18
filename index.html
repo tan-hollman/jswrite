@@ -19,8 +19,9 @@
     "esri/views/MapView",   
     "esri/Graphic",  
     "esri/layers/GraphicsLayer",
-    "esri/geometry"
-  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry) {
+    "esri/geometry",
+    "esri/layers/FeatureLayer"
+  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry, FeatureLayer) {
 
       esriConfig.apiKey = "AAPK5c4b46937c724a85bafafb4e90db2ef8FulouvcXphhvck6dUoP3w0m88XyT223SeoG7XCVjKvxBWfXmFpVhYYFUJevt3N3r";
       const map = new Map({
@@ -117,6 +118,13 @@
          graphicsLayer.add(pointGraphic);
          graphicsLayer.add(polylineGraphic);
          graphicsLayer.add(polygonGraphic);
+
+         const usaeduLayer = new FeatureLayer({
+            url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer" //get URL from AGOL Item Page
+        });
+          
+        map.add(usaeduLayer);
+        
     });
   </script>
 
