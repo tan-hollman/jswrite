@@ -21,63 +21,64 @@
     "esri/layers/GraphicsLayer",
     "esri/geometry",
     "esri/layers/FeatureLayer",
-    "esri/widgets/Editor"
-  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry, FeatureLayer, Editor) {
+    "esri/widgets/Editor",
+    "esri/widgets/Legend"
+  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry, FeatureLayer, Editor, Legend) {
 
       esriConfig.apiKey = "AAPK5c4b46937c724a85bafafb4e90db2ef8FulouvcXphhvck6dUoP3w0m88XyT223SeoG7XCVjKvxBWfXmFpVhYYFUJevt3N3r";
-      const map = new Map({
-        basemap: "arcgis-topographic" // Basemap layer
+      const map = new Map({ //creating map
+        basemap: "arcgis-topographic"
       });
 
-      const view = new MapView({
+      const view = new MapView({ //creating mapview
           map: map,
-          center: [-97.7431, 30.2672], // Longitude, latitude
-          zoom: 13, // Zoom level
-          container: "viewDiv" // Div element
+          center: [-97.7431, 30.2672],
+          zoom: 13,
+          container: "viewDiv"
         });
 
-        const graphicsLayer = new GraphicsLayer();  
+        const graphicsLayer = new GraphicsLayer(); //creating graphics layer
         map.add(graphicsLayer);
 
-        const point = { //Create a point  
+        const point = { //creating point
           type: "point",  
-          longitude: -97.750689,    //long lat of Stevie Ray Vaughan Statue
+          longitude: -97.750689,
           latitude: 30.263098
         };   
         
-        const simpleMarkerSymbol = {  
+        const simpleMarkerSymbol = { //creating symbol for point
           type: "simple-marker",
           style: "square",  
-          color: [0, 0, 139],  // Color of blues rock
+          color: [0, 0, 139],
           outline: {  
-            color: [255, 255, 255], // White  
+            color: [255, 255, 255],
             width: 1
           }  
         };
 
-        const popupTemplate = {
+        const popupTemplate = { //creating popup for point
           title: "{Name}",
           content: "{Description}"
         }
-        const attributes = {
+        const attributes = { //adding attributes to point
           Name: "Stevie Ray Vaughan Statue",
           Description: "A bronze sculpture of Stevie Ray Vaughan by Ralph Helmick"
         }
 
-        const pointGraphic = new Graphic({  
+        const pointGraphic = new Graphic({   //creating graphic for point
           geometry: point,  
           symbol: simpleMarkerSymbol,
           attributes: attributes,
           popupTemplate: popupTemplate
          });
 
-        const simpleLineSymbol = {
+        const simpleLineSymbol = { //creating symbol for line
           type: "simple-line",
           color: [226, 119, 40],  // RGB color
           width: 4
         };
         
-        const polyline = {
+        const polyline = { //creating polyline
           type: "polyline",
           paths: [
             [-98.75, 30.25],
@@ -88,12 +89,12 @@
           ]
         };
 
-        const polylineGraphic = new Graphic({
+        const polylineGraphic = new Graphic({ //creating graphic for polyline
           geometry: polyline,
           symbol: simpleLineSymbol
         });
 
-        const simpleFillSymbol = {
+        const simpleFillSymbol = { //creating transparent fill for polygon
           type: "simple-fill",
           color: [0, 0, 0, 0],
           outline: {
@@ -102,7 +103,7 @@
           }
         };
 
-        const polygon = {
+        const polygon = { //creating polygon
           type: "polygon",
           rings: [
             [-96.75, 29.25],
@@ -113,29 +114,30 @@
           ]
         };
 
-        const polygonGraphic = new Graphic({
+        const polygonGraphic = new Graphic({ //creating graphic for polygon
           geometry: polygon,
           symbol: simpleFillSymbol
         });
 
+         //adding graphics to map
          graphicsLayer.add(pointGraphic);
          graphicsLayer.add(polylineGraphic);
          graphicsLayer.add(polygonGraphic);
 
-         const popupEduusa = {
+         const popupEduusa = { //creating popup for edus
           "title": "EDUs",
           "content": "<b>Name:</b> {INSTNM}<br><b>Total Enrollment:</b> {INSTSIZE}<br><b>Website:</b> <a href='{WEBADDR}'>{WEBADDR}</a><br><b>Telephone:</b> {GENTELE}<br>"
         }
 
-         const usaeduLayer = new FeatureLayer({
+         const usaeduLayer = new FeatureLayer({ //creating layer for edus
             url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
             outFields: ["INSTNM", "INSTSIZE", "WEBADDR", "GENTELE"],
             popupTemplate: popupEduusa
         });
 
-        map.add(usaeduLayer);
+        map.add(usaeduLayer); //adding layer to map
         
-        const airportRenderer = {
+        const airportRenderer = { //creating symbol for airports
           "type": "simple",
           "symbol": {
             "type": "picture-marker",
@@ -145,12 +147,12 @@
           }
         }
 
-        const popupAirports = {
+        const popupAirports = { //creating popup for airports
           "title": "Airports",
           "content": "<b>Facility Name:</b> {Fac_Name}<br><b>City:</b> {City}<br><b>State:</b> {State_Name}<br>"
         }
         
-        const airportLabels = {
+        const airportLabels = { //creating label for airports
           symbol: {
             type: "text",
             color: "#FFFFFF",
@@ -169,7 +171,7 @@
           }
         };
 
-        const airportsLayer = new FeatureLayer({
+        const airportsLayer = new FeatureLayer({ //creating layer for airports
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Airports_Hollman/FeatureServer",
           renderer: airportRenderer,
           definitionExpression: "Fac_Type = 'AIRPORT'",
@@ -178,9 +180,9 @@
           labelingInfo: [airportLabels]
         });
         
-        map.add(airportsLayer);
+        map.add(airportsLayer); //adding layer to map
 
-        const heliportRenderer = {
+        const heliportRenderer = { //creating symbol for heliports
           "type": "simple",
           "symbol": {
             "type": "picture-marker",
@@ -190,12 +192,12 @@
           }
         }
 
-        const popupHeliports = {
+        const popupHeliports = { //creating popup for heliports
           "title": "Heliports",
           "content": "<b>Facility Name:</b> {Fac_Name}<br><b>City:</b> {City}<br><b>State:</b> {State_Name}<br>"
         }
 
-        const heliportLabels = {
+        const heliportLabels = { //creating label for heliports
           symbol: {
             type: "text",
             color: "#FFFFFF",
@@ -214,7 +216,7 @@
           }
         };
 
-        const heliportsLayer = new FeatureLayer({
+        const heliportsLayer = new FeatureLayer({ //creating layer for heliports
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Airports_Hollman/FeatureServer",
           renderer: heliportRenderer,
           definitionExpression: "Fac_Type = 'HELIPORT'",
@@ -223,9 +225,9 @@
           labelingInfo: [heliportLabels]
         });
 
-        map.add(heliportsLayer);
+        map.add(heliportsLayer); //adding layer to map
 
-        const myAirportsRenderer = {
+        const myAirportsRenderer = { //creating symbol for my airports
           "type": "simple",
           "symbol": {
             "type": "picture-marker",
@@ -235,14 +237,14 @@
           }
         }
 
-        const myAirportsLabels = {
+        const myAirportsLabels = { //creating label for my airports
           symbol: {
             type: "text",
             color: "#FFFFFF",
             haloColor: "#5E8D74",
             haloSize: "2px",
             font: {
-              size: "12px",
+              size: "16px",
               family: "Noto Sans",
               style: "italic",
               weight: "normal"
@@ -254,28 +256,45 @@
           }
         };
 
-        const myAirports = new FeatureLayer({
+        const myAirports = new FeatureLayer({ //creating layer for my airports
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Hollman_Airports/FeatureServer",
           renderer: myAirportsRenderer,
           outFields: ["AirportCode"],
           labelingInfo: [myAirportsLabels]
         });
 
-        
-         
-        map.add(myAirports);
+        map.add(myAirports); //adding layer to map
 
-        const pointInfos = {
+        const pointInfos = { //creating point info for editor
           layer: myAirports
         }
 
-        const editor = new Editor({
+        const editor = new Editor({ //creating editor for my airports
           view: view,
           layerInfos: [pointInfos]
         });
 
-        view.ui.add(editor, "top-right");
+        view.ui.add(editor, "top-right"); //adding editor to map
+        
+        const legend = new Legend({ //creating legend
+          view: view,
+          layerInfos: [
+            {
+              layer: myAirports,
+              title: "My Airports"
+            },
+            {
+              layer: heliportsLayer,
+              title: "Heliports"
+            },
+            {
+              layer: airportsLayer,
+              title: "Airports"
+            }
+          ]
+        });
 
+        view.ui.add(legend, "bottom-right"); //adding legend to map
     });
   </script>
 
