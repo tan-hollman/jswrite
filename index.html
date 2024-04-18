@@ -150,7 +150,7 @@
         const airportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Airports_Hollman/FeatureServer",
           renderer: airportRenderer,
-          definitionExpression: "Fac_Type = 'AIRPORT'",
+          // definitionExpression: "Fac_Type = 'AIRPORT'",
           outFields: ["Fac_Name", "City", "State_Name", "Local_Phon"],
           popupTemplate: popupAirports
         });
