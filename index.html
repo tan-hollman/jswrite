@@ -144,14 +144,14 @@
 
         const popupAirports = {
           "title": "Airports",
-          "content": "<b>Facility Name:</b> {Fac_Name}<br><b>City:</b> {City}<br><b>State:</b> {State_Name}<br><b>Telephone:</b> {Local_Phon}<br>"
+          "content": "<b>Facility Name:</b> {Fac_Name}<br><b>City:</b> {City}<br><b>State:</b> {State_Name}<br>"
         }
 
         const airportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Airports_Hollman/FeatureServer",
           renderer: airportRenderer,
           definitionExpression: "Fac_Type = 'AIRPORT'",
-          outFields: ["Fac_Name", "City", "State_Name", "Local_Phon"],
+          outFields: ["Fac_Name", "City", "State_Name"],
           popupTemplate: popupAirports
         });
         
