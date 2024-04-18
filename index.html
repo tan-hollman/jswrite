@@ -225,8 +225,19 @@
 
         map.add(heliportsLayer);
 
+        const myAirportsRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "https://tan-hollman.github.io/jswrite/green%20triangle.png",
+            "width": "18px",
+            "height": "18px"
+          }
+        }
+
         const myAirports = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Hollman_Airports/FeatureServer",
+          renderer: myAirportsRenderer,
           outFields: ["AirportCode"],
         });
          
@@ -242,7 +253,7 @@
         });
 
         view.ui.add(editor, "top-right");
-        
+
     });
   </script>
 
