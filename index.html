@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hello, AGOL! test</title>
+  <title>Hello, AGOL!</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
@@ -20,8 +20,9 @@
     "esri/Graphic",  
     "esri/layers/GraphicsLayer",
     "esri/geometry",
-    "esri/layers/FeatureLayer"
-  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry, FeatureLayer) {
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Editor"
+  ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, geometry, FeatureLayer, Editor) {
 
       esriConfig.apiKey = "AAPK5c4b46937c724a85bafafb4e90db2ef8FulouvcXphhvck6dUoP3w0m88XyT223SeoG7XCVjKvxBWfXmFpVhYYFUJevt3N3r";
       const map = new Map({
@@ -223,6 +224,25 @@
         });
 
         map.add(heliportsLayer);
+
+        const myAirports = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Hollman_Airports/FeatureServer",
+          outFields: ["AirportCode"],
+        });
+         
+        map.add(myAirports);
+
+        const pointInfos = {
+          layer: myAirports
+        }
+
+        const editor = new Editor({
+          view: view,
+          layerInfos: [pointInfos]
+        });
+
+        view.ui.add(editor, "top-right");
+        
     });
   </script>
 
